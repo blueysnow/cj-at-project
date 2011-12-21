@@ -1,0 +1,33 @@
+﻿Build started 12/13/2011 10:30:37 PM.
+     1>Project "C:\dev\tradelink\BrokerServers\AnvilServer\AnvilServer.vcxproj" on node 3 (rebuild target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\AnvilServer.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\TradeLibFast /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _AFXEXT /D _VC80_UPGRADE=0x0710 /D _WINDLL /D _MBCS /D _AFXDLL /Gm- /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\AnvilServer.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt StdAfx.cpp
+         StdAfx.cpp
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\TradeLibFast /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _AFXEXT /D _VC80_UPGRADE=0x0710 /D _WINDLL /D _MBCS /D _AFXDLL /Gm- /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\AnvilServer.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt AnvilServer.cpp AnvilUtil.cpp AVL_TLWM.cpp AVLIndex.cpp AVLStock.cpp ..\TradeLibFast\Util.cpp
+         AnvilServer.cpp
+         AnvilUtil.cpp
+         AVL_TLWM.cpp
+         AVLIndex.cpp
+         AVLStock.cpp
+         Util.cpp
+         Generating Code...
+       ResourceCompile:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D _DEBUG /D _VC80_UPGRADE=0x0710 /D _AFXDLL /l"0x0409" /nologo /fo"Debug\AnvilExtTest.res" AnvilExtTest.rc 
+       Link:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"Debug\AnvilServer.dll" /INCREMENTAL:NO /NOLOGO /LIBPATH:..\Debug /LIBPATH:Debug\ Business.lib Observer.lib Version.lib TradeLibFast.lib /DEF:"AnvilServer.def" /MANIFEST /ManifestFile:"Debug\AnvilServer.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"Debug\AnvilServer.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"Debug\AnvilServer.lib" /MACHINE:X86 /DLL Debug\AnvilExtTest.res
+         Debug\AnvilServer.obj
+         Debug\AnvilUtil.obj
+         Debug\AVL_TLWM.obj
+         Debug\AVLIndex.obj
+         Debug\AVLStock.obj
+         Debug\StdAfx.obj
+         Debug\Util.obj
+         C:\dev\tradelink\BrokerServers\Debug\TradeLibFast.lib
+     1>LINK : fatal error LNK1181: cannot open input file 'TradeLibFast.lib'
+     1>Done Building Project "C:\dev\tradelink\BrokerServers\AnvilServer\AnvilServer.vcxproj" (rebuild target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:08.57

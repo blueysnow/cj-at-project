@@ -1,0 +1,6 @@
+C:\dev\tradelink\ServerSterling\obj\Debug\ResolveAssemblyReference.cache
+C:\dev\tradelink\ServerSterling\obj\Debug\ServerSterling.csproj.ResolveComReference.cache
+C:\dev\tradelink\ServerSterling\obj\Debug\SterServer.SterMain.resources
+C:\dev\tradelink\ServerSterling\obj\Debug\SterServer.Properties.Resources.resources
+C:\dev\tradelink\ServerSterling\obj\Debug\GenerateResource.read.1.tlog
+C:\dev\tradelink\ServerSterling\obj\Debug\GenerateResource.write.1.tlog

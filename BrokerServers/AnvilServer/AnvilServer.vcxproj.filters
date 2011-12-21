@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="AnvilApi">
+      <UniqueIdentifier>{7b633537-f198-4964-8ee8-51a67672cc7b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BusinessApi.h">
+      <Filter>AnvilApi</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonIds.h">
+      <Filter>AnvilApi</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageIds.h">
+      <Filter>AnvilApi</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages.h">
+      <Filter>AnvilApi</Filter>
+    </ClInclude>
+    <ClInclude Include="ObserverApi.h">
+      <Filter>AnvilApi</Filter>
+    </ClInclude>
+    <ClInclude Include="AnvilUtil.h" />
+    <ClInclude Include="AVL_TLWM.h" />
+    <ClInclude Include="AVLIndex.h" />
+    <ClInclude Include="AVLStock.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="..\TradeLibFast\Util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AnvilExtTest.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AnvilServer.Config.txt" />
+    <None Include="AnvilServer.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AnvilServer.cpp" />
+    <ClCompile Include="AnvilUtil.cpp" />
+    <ClCompile Include="AVL_TLWM.cpp" />
+    <ClCompile Include="AVLIndex.cpp" />
+    <ClCompile Include="AVLStock.cpp" />
+    <ClCompile Include="StdAfx.cpp" />
+    <ClCompile Include="..\TradeLibFast\Util.cpp" />
+  </ItemGroup>
+</Project>
