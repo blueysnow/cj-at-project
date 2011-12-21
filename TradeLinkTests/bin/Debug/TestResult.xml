@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\dev\tradelink\TradeLinkTests\bin\Debug\TestTradeLink.exe" total="173" errors="1" failures="2" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2011-12-09" time="08:20:57">
+  <environment nunit-version="2.5.10.11092" clr-version="2.0.50727.3053" os-version="Microsoft Windows NT 5.1.2600 Service Pack 3" platform="Win32NT" cwd="C:\dev\tradelink\TradeLinkTests\bin\Debug" machine-name="CJYU-A18394B8FD" user="Administrator" user-domain="CJYU-A18394B8FD" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite type="Assembly" name="C:\dev\tradelink\TradeLinkTests\bin\Debug\TestTradeLink.exe" executed="True" result="Failure" success="False" time="35.938" asserts="0">
+    <results>
+      <test-suite type="Namespace" name="TestTradeLink" executed="True" result="Failure" success="False" time="35.922" asserts="0">
+        <results>
+          <test-suite type="TestFixture" name="TestAccount" executed="True" result="Success" success="True" time="0.047" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestAccount.Basics" executed="True" result="Success" success="True" time="0.031" asserts="3" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestAsyncResponse" executed="True" result="Success" success="True" time="0.234" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestAsyncResponse.ImbalanceTest" executed="True" result="Success" success="True" time="0.031" asserts="6" />
+              <test-case name="TestTradeLink.TestAsyncResponse.TickTest" executed="True" result="Success" success="True" time="0.203" asserts="6" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestBar" executed="True" result="Success" success="True" time="0.031" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestBar.BarIntervals" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+              <test-case name="TestTradeLink.TestBar.BarsBack" executed="True" result="Success" success="True" time="0.016" asserts="2" />
+              <test-case name="TestTradeLink.TestBar.BarTime" executed="True" result="Success" success="True" time="0.000" asserts="6" />
+              <test-case name="TestTradeLink.TestBar.Construction" executed="True" result="Success" success="True" time="0.000" asserts="8" />
+              <test-case name="TestTradeLink.TestBar.SerializeDeseralize" executed="True" result="Success" success="True" time="0.000" asserts="9" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestBarList" executed="True" result="Failure" success="False" time="8.359" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestBarList.AsyncFromGoogle" executed="True" result="Error" success="False" time="4.328" asserts="2">
+                <failure>
+                  <message><![CDATA[System.NullReferenceException : Object reference not set to an instance of an object.]]></message>
+                  <stack-trace><![CDATA[at TestTradeLink.TestBarList.AsyncFromGoogle() in C:\dev\tradelink\TradeLinkTests\TestBarList.cs:line 355
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="TestTradeLink.TestBarList.BarMath" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+              <test-case name="TestTradeLink.TestBarList.CustomInterval" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+              <test-case name="TestTradeLink.TestBarList.DefaultIntervalAndReset" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+              <test-case name="TestTradeLink.TestBarList.FiveMin" executed="True" result="Success" success="True" time="0.000" asserts="5" />
+              <test-case name="TestTradeLink.TestBarList.FromEPF" executed="True" result="Success" success="True" time="0.250" asserts="1" />
+              <test-case name="TestTradeLink.TestBarList.FromGoogle" executed="True" result="Success" success="True" time="3.531" asserts="2" />
+              <test-case name="TestTradeLink.TestBarList.FromTIK" executed="True" result="Success" success="True" time="0.078" asserts="1" />
+              <test-case name="TestTradeLink.TestBarList.HourTest" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+              <test-case name="TestTradeLink.TestBarList.NegativeBars" executed="True" result="Success" success="True" time="0.094" asserts="7" />
+              <test-case name="TestTradeLink.TestBarList.NewBarEvent" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+              <test-case name="TestTradeLink.TestBarList.OneMinute" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestBarList.PointFiveMin" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+              <test-case name="TestTradeLink.TestBarList.PointHour" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestBarList.PointMinute" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestBarList.TickInterval" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+              <test-case name="TestTradeLink.TestBarList.VolInterval" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestBarListTracker" executed="True" result="Success" success="True" time="0.016" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestBarListTracker.DefaultInt" executed="True" result="Success" success="True" time="0.016" asserts="7" />
+              <test-case name="TestTradeLink.TestBarListTracker.TickInt" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestBasket" executed="True" result="Success" success="True" time="0.016" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestBasket.BasketBasics" executed="True" result="Success" success="True" time="0.000" asserts="7" />
+              <test-case name="TestTradeLink.TestBasket.Enumeration" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+              <test-case name="TestTradeLink.TestBasket.Files" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestBasket.Multiple" executed="True" result="Success" success="True" time="0.000" asserts="5" />
+              <test-case name="TestTradeLink.TestBasket.Serialization" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestBook" executed="True" result="Success" success="True" time="0.000" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestBook.BuildBook" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestBookTracker" executed="True" result="Success" success="True" time="0.000" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestBookTracker.BasicTrack" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestBroker" executed="True" result="Success" success="True" time="0.031" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestBroker.Basics" executed="True" result="Success" success="True" time="0.016" asserts="13" />
+              <test-case name="TestTradeLink.TestBroker.BBO" executed="True" result="Success" success="True" time="0.000" asserts="14" />
+              <test-case name="TestTradeLink.TestBroker.MultiAccount" executed="True" result="Success" success="True" time="0.016" asserts="7" />
+              <test-case name="TestTradeLink.TestBroker.OPGs" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestCalc" executed="True" result="Success" success="True" time="0.172" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestCalc.ArrayArrayMath" executed="True" result="Success" success="True" time="0.000" asserts="8" />
+              <test-case name="TestTradeLink.TestCalc.ArrayScalarMath" executed="True" result="Success" success="True" time="0.000" asserts="8" />
+              <test-case name="TestTradeLink.TestCalc.ArraySlices" executed="True" result="Success" success="True" time="0.000" asserts="7" />
+              <test-case name="TestTradeLink.TestCalc.AvgAndStd" executed="True" result="Success" success="True" time="0.000" asserts="6" />
+              <test-case name="TestTradeLink.TestCalc.ClosePL" executed="True" result="Success" success="True" time="0.000" asserts="4" />
+              <test-case name="TestTradeLink.TestCalc.DecimalPerformance" executed="True" result="Success" success="True" time="0.109" asserts="1" />
+              <test-case name="TestTradeLink.TestCalc.IntPerformance" executed="True" result="Success" success="True" time="0.031" asserts="1" />
+              <test-case name="TestTradeLink.TestCalc.MaxDD" executed="True" result="Success" success="True" time="0.016" asserts="2" />
+              <test-case name="TestTradeLink.TestCalc.OpenPL" executed="True" result="Success" success="True" time="0.000" asserts="8" />
+              <test-case name="TestTradeLink.TestCalc.Sums" executed="True" result="Success" success="True" time="0.000" asserts="6" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TesteSigTick" executed="True" result="Success" success="True" time="0.000" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TesteSigTick.Hours" executed="True" result="Success" success="True" time="0.000" asserts="12" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestGenericTracker" executed="True" result="Success" success="True" time="0.016" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestGenericTracker.Basics" executed="True" result="Success" success="True" time="0.000" asserts="6" />
+              <test-case name="TestTradeLink.TestGenericTracker.Importing" executed="True" result="Success" success="True" time="0.016" asserts="12" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestGZip" executed="True" result="Success" success="True" time="0.016" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestGZip.CompressDecompress" executed="True" result="Success" success="True" time="0.016" asserts="2" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestHaltResume" executed="True" result="Success" success="True" time="0.016" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestHaltResume.SerializeDeserilize" executed="True" result="Success" success="True" time="0.016" asserts="5" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestIdTracker" executed="True" result="Success" success="True" time="0.000" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestIdTracker.Basics" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestIdTracker.VirtualIds" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestImbalance" executed="True" result="Success" success="True" time="0.094" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestImbalance.Performance" executed="True" result="Success" success="True" time="0.094" asserts="2" />
+              <test-case name="TestTradeLink.TestImbalance.SerializeDeserilize" executed="True" result="Success" success="True" time="0.000" asserts="9" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestIndication" executed="True" result="Success" success="True" time="0.016" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestIndication.SerializeDeserilize" executed="True" result="Success" success="True" time="0.000" asserts="7" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestLatencyTracker" executed="True" result="Success" success="True" time="0.063" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestLatencyTracker.Test" executed="True" result="Success" success="True" time="0.063" asserts="3" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestMessage" executed="True" result="Success" success="True" time="0.016" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestMessage.EncodeDecode" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+              <test-case name="TestTradeLink.TestMessage.MultipleMessages" executed="True" result="Success" success="True" time="0.000" asserts="14" />
+              <test-case name="TestTradeLink.TestMessage.PartialMessage" executed="True" result="Success" success="True" time="0.000" asserts="10" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestMessageTracker" executed="True" result="Success" success="True" time="0.000" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestMessageTracker.TestDailyBars" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+              <test-case name="TestTradeLink.TestMessageTracker.TestIntradayBars" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestMulti" executed="True" result="Success" success="True" time="0.750" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestMulti.BarPerformance" executed="True" result="Success" success="True" time="0.141" asserts="5" />
+              <test-case name="TestTradeLink.TestMulti.ExecutionPerformance" executed="True" result="Success" success="True" time="0.281" asserts="6" />
+              <test-case name="TestTradeLink.TestMulti.RawPerformance" executed="True" result="Success" success="True" time="0.078" asserts="11" />
+              <test-case name="TestTradeLink.TestMulti.RawPerformanceWithLoad" executed="True" result="Success" success="True" time="0.172" asserts="25" />
+              <test-case name="TestTradeLink.TestMulti.RawSingle" executed="True" result="Success" success="True" time="0.063" asserts="9" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestOffsetInfo" executed="True" result="Success" success="True" time="0.000" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestOffsetInfo.SerializeDeserialize" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestOffsetTracker" executed="True" result="Success" success="True" time="0.094" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestOffsetTracker.CustomOffsets" executed="True" result="Success" success="True" time="0.000" asserts="12" />
+              <test-case name="TestTradeLink.TestOffsetTracker.HitAndResend" executed="True" result="Success" success="True" time="0.016" asserts="36" />
+              <test-case name="TestTradeLink.TestOffsetTracker.IgnoreByDefault" executed="True" result="Success" success="True" time="0.000" asserts="12" />
+              <test-case name="TestTradeLink.TestOffsetTracker.NoResendPartial" executed="True" result="Success" success="True" time="0.000" asserts="26" />
+              <test-case name="TestTradeLink.TestOffsetTracker.NoSimulataneous" executed="True" result="Success" success="True" time="0.000" asserts="27" />
+              <test-case name="TestTradeLink.TestOffsetTracker.ProfitOnly" executed="True" result="Success" success="True" time="0.016" asserts="16" />
+              <test-case name="TestTradeLink.TestOffsetTracker.ResendTest2" executed="True" result="Success" success="True" time="0.000" asserts="13" />
+              <test-case name="TestTradeLink.TestOffsetTracker.StopAndProfit" executed="True" result="Success" success="True" time="0.000" asserts="26" />
+              <test-case name="TestTradeLink.TestOffsetTracker.StopAndProfitShort" executed="True" result="Success" success="True" time="0.016" asserts="32" />
+              <test-case name="TestTradeLink.TestOffsetTracker.StopAndProfitShortFlat" executed="True" result="Success" success="True" time="0.016" asserts="24" />
+              <test-case name="TestTradeLink.TestOffsetTracker.StopOnly" executed="True" result="Success" success="True" time="0.000" asserts="16" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestOrder" executed="True" result="Success" success="True" time="0.016" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestOrder.Defaults" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestOrder.Fill" executed="True" result="Success" success="True" time="0.000" asserts="18" />
+              <test-case name="TestTradeLink.TestOrder.FillBidAsk" executed="True" result="Success" success="True" time="0.000" asserts="14" />
+              <test-case name="TestTradeLink.TestOrder.FillBidAskPartial" executed="True" result="Success" success="True" time="0.016" asserts="2" />
+              <test-case name="TestTradeLink.TestOrder.MarketOrder" executed="True" result="Success" success="True" time="0.000" asserts="6" />
+              <test-case name="TestTradeLink.TestOrder.SerializationAndDeserialization" executed="True" result="Success" success="True" time="0.000" asserts="11" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestOrderTracker" executed="True" result="Success" success="True" time="0.016" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestOrderTracker.Cancel" executed="True" result="Success" success="True" time="0.000" asserts="24" />
+              <test-case name="TestTradeLink.TestOrderTracker.Fill" executed="True" result="Success" success="True" time="0.000" asserts="26" />
+              <test-case name="TestTradeLink.TestOrderTracker.FixSentOnUnknown" executed="True" result="Success" success="True" time="0.000" asserts="13" />
+              <test-case name="TestTradeLink.TestOrderTracker.PartialFill" executed="True" result="Success" success="True" time="0.000" asserts="26" />
+              <test-case name="TestTradeLink.TestOrderTracker.Sent" executed="True" result="Success" success="True" time="0.000" asserts="24" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestOverSell" executed="True" result="Success" success="True" time="0.000" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestOverSell.SplitCancelCopy" executed="True" result="Success" success="True" time="0.000" asserts="12" />
+              <test-case name="TestTradeLink.TestOverSell.SplitWithPartialFillRoundMinsize100" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestOverSell.TestNormalEntry" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestOverSell.TestNormalExit" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestOverSell.TestOverBuyAdjust" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestOverSell.TestOverCoverDrop" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestOverSell.TestOverSellAdjust" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestOverSell.TestOverSellDrop" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestPapertradeTracker" executed="True" result="Success" success="True" time="0.000" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestPapertradeTracker.TestBidAsk" executed="True" result="Success" success="True" time="0.000" asserts="10" />
+              <test-case name="TestTradeLink.TestPapertradeTracker.TestTradeFill" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestPosition" executed="True" result="Success" success="True" time="0.016" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestPosition.Basics" executed="True" result="Success" success="True" time="0.000" asserts="27" />
+              <test-case name="TestTradeLink.TestPosition.ClosedPL" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+              <test-case name="TestTradeLink.TestPosition.CreateInvalidFromSymbol" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+              <test-case name="TestTradeLink.TestPosition.FlipSideInOneTrade" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+              <test-case name="TestTradeLink.TestPosition.PositionAccountTest" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+              <test-case name="TestTradeLink.TestPosition.SerializeDeserialize" executed="True" result="Success" success="True" time="0.000" asserts="4" />
+              <test-case name="TestTradeLink.TestPosition.UsingTrades" executed="True" result="Success" success="True" time="0.000" asserts="8" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestPositionTracker" executed="True" result="Success" success="True" time="0.000" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestPositionTracker.Adjust" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+              <test-case name="TestTradeLink.TestPositionTracker.BlankPositionReq" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestPositionTracker.InitAndAdjust" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestPositionTracker.MultipleAccount" executed="True" result="Success" success="True" time="0.000" asserts="13" />
+              <test-case name="TestTradeLink.TestPositionTracker.NewPosition" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestRandomSymbol" executed="True" result="Success" success="True" time="0.000" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestRandomSymbol.Basics" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestRandomTicks" executed="True" result="Success" success="True" time="0.000" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestRandomTicks.Basics" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestREGSHOTracker" executed="True" result="Success" success="True" time="0.031" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestREGSHOTracker.Basic" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+              <test-case name="TestTradeLink.TestREGSHOTracker.BasicStopAndLimit" executed="True" result="Success" success="True" time="0.000" asserts="5" />
+              <test-case name="TestTradeLink.TestREGSHOTracker.BasicWithAccount" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+              <test-case name="TestTradeLink.TestREGSHOTracker.DoubleBasicWithFlat" executed="True" result="Success" success="True" time="0.000" asserts="4" />
+              <test-case name="TestTradeLink.TestREGSHOTracker.FillPendTest" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+              <test-case name="TestTradeLink.TestREGSHOTracker.FillThenStopAndLimitOversell" executed="True" result="Success" success="True" time="0.016" asserts="7" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestResponse" executed="True" result="Success" success="True" time="0.016" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestResponse.AlwaysEnter" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+              <test-case name="TestTradeLink.TestResponse.NewsTest" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestResponse.StandardResponse" executed="True" result="Success" success="True" time="0.000" asserts="7" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestSecurity" executed="True" result="Success" success="True" time="0.000" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestSecurity.OptionOSIParse" executed="True" result="Success" success="True" time="0.000" asserts="5" />
+              <test-case name="TestTradeLink.TestSecurity.OptionSec2OSI" executed="True" result="Success" success="True" time="0.000" asserts="4" />
+              <test-case name="TestTradeLink.TestSecurity.Parsing" executed="True" result="Success" success="True" time="0.000" asserts="11" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestSingleSim" executed="True" result="Success" success="True" time="0.234" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestSingleSim.RawPerformance" executed="True" result="Success" success="True" time="0.078" asserts="10" />
+              <test-case name="TestTradeLink.TestSingleSim.RawPerformanceWithLoad" executed="True" result="Success" success="True" time="0.109" asserts="23" />
+              <test-case name="TestTradeLink.TestSingleSim.RawSingle" executed="True" result="Success" success="True" time="0.031" asserts="8" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestSkin" executed="True" result="Success" success="True" time="0.703" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestSkin.SerializationDeserialization" executed="True" result="Success" success="True" time="0.703" asserts="5" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestStock" executed="True" result="Success" success="True" time="0.016" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestStock.Basics" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestTemplate" executed="True" result="Success" success="True" time="0.000" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestTemplate.Test" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestTick" executed="True" result="Success" success="True" time="0.078" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestTick.Basics" executed="True" result="Success" success="True" time="0.000" asserts="7" />
+              <test-case name="TestTradeLink.TestTick.Serialization" executed="True" result="Success" success="True" time="0.000" asserts="10" />
+              <test-case name="TestTradeLink.TestTick.SerializationPerformance" executed="True" result="Success" success="True" time="0.078" asserts="2" />
+              <test-case name="TestTradeLink.TestTick.StaticFactories" executed="True" result="Success" success="True" time="0.000" asserts="15" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestTickArchiver" executed="True" result="Success" success="True" time="0.078" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestTickArchiver.CreateRead" executed="True" result="Success" success="True" time="0.063" asserts="2" />
+              <test-case name="TestTradeLink.TestTickArchiver.Multiday" executed="True" result="Success" success="True" time="0.016" asserts="2" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestTickFileFilter" executed="True" result="Success" success="True" time="0.234" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestTickFileFilter.AndTest" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestTickFileFilter.Basics" executed="True" result="Success" success="True" time="0.000" asserts="5" />
+              <test-case name="TestTradeLink.TestTickFileFilter.SerializeDeserialize" executed="True" result="Success" success="True" time="0.234" asserts="3" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestTickTracker" executed="True" result="Success" success="True" time="0.000" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestTickTracker.Basics" executed="True" result="Success" success="True" time="0.000" asserts="43" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestTickWatcher" executed="True" result="Success" success="True" time="0.016" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestTickWatcher.WatcherTest" executed="True" result="Success" success="True" time="0.016" asserts="5" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestTikWriterReader" executed="True" result="Success" success="True" time="5.781" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestTikWriterReader.FilenameTest" executed="True" result="Success" success="True" time="0.047" asserts="2" />
+              <test-case name="TestTradeLink.TestTikWriterReader.FilenameTestOption" executed="True" result="Success" success="True" time="0.047" asserts="2" />
+              <test-case name="TestTradeLink.TestTikWriterReader.TikFromTick" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+              <test-case name="TestTradeLink.TestTikWriterReader.TikTypes" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestTikWriterReader.WriteandRead" executed="True" result="Success" success="True" time="5.656" asserts="3" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestTrade" executed="True" result="Success" success="True" time="0.016" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestTrade.Construction" executed="True" result="Success" success="True" time="0.000" asserts="4" />
+              <test-case name="TestTradeLink.TestTrade.Defaults" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestTrade.SerializeDeserialize" executed="True" result="Success" success="True" time="0.000" asserts="10" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestTradeLink_IP" executed="True" result="Failure" success="False" time="17.922" asserts="1">
+            <results>
+              <test-case name="TestTradeLink.TestTradeLink_IP.ClientDisconnect" executed="True" result="Success" success="True" time="0.266" asserts="5" />
+              <test-case name="TestTradeLink.TestTradeLink_IP.FeatureTests" executed="True" result="Success" success="True" time="0.203" asserts="4" />
+              <test-case name="TestTradeLink.TestTradeLink_IP.ServerDisconnect" executed="True" result="Failure" success="False" time="16.750" asserts="4">
+                <failure>
+                  <message><![CDATA[  Expected: True
+  But was:  False
+]]></message>
+                  <stack-trace><![CDATA[at TestTradeLink.TestTradeLink_IP.ServerDisconnect() in C:\dev\tradelink\TradeLinkTests\TestTradeLink_IP.cs:line 251
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="TestTradeLink.TestTradeLink_IP.TickPerformance" executed="True" result="Failure" success="False" time="0.000" asserts="1">
+                <failure>
+                  <message><![CDATA[  Expected: greater than 0.0d
+  But was:  0.0d
+]]></message>
+                  <stack-trace><![CDATA[at TestTradeLink.TestTradeLink_IP.TickPerformance() in C:\dev\tradelink\TradeLinkTests\TestTradeLink_IP.cs:line 197
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestTradeLink_WM" executed="True" result="Success" success="True" time="0.625" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestTradeLink_WM.FillTests" executed="True" result="Success" success="True" time="0.016" asserts="3" />
+              <test-case name="TestTradeLink.TestTradeLink_WM.Imbalance" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestTradeLink_WM.ImbalancePerformance" executed="True" result="Success" success="True" time="0.016" asserts="2" />
+              <test-case name="TestTradeLink.TestTradeLink_WM.OrderTests" executed="True" result="Success" success="True" time="0.000" asserts="6" />
+              <test-case name="TestTradeLink.TestTradeLink_WM.StartupTests" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+              <test-case name="TestTradeLink.TestTradeLink_WM.TickPerformance" executed="True" result="Success" success="True" time="0.016" asserts="3" />
+              <test-case name="TestTradeLink.TestTradeLink_WM.TickTests" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestTrailTracker" executed="True" result="Success" success="True" time="0.016" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestTrailTracker.Basics" executed="True" result="Success" success="True" time="0.016" asserts="3" />
+              <test-case name="TestTradeLink.TestTrailTracker.TrailStartedAfterFirePoint" executed="True" result="Success" success="True" time="0.000" asserts="4" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestUtil" executed="True" result="Success" success="True" time="0.016" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestUtil.Date" executed="True" result="Success" success="True" time="0.000" asserts="12" />
+              <test-case name="TestTradeLink.TestUtil.DateException" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+              <test-case name="TestTradeLink.TestUtil.FastTime" executed="True" result="Success" success="True" time="0.000" asserts="7" />
+              <test-case name="TestTradeLink.TestUtil.TickIndex" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+              <test-case name="TestTradeLink.TestUtil.TLDatematch" executed="True" result="Success" success="True" time="0.000" asserts="7" />
+              <test-case name="TestTradeLink.TestUtil.TradesToClosedPLString" executed="True" result="Success" success="True" time="0.016" asserts="18" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="TestWMUtil" executed="True" result="Success" success="True" time="0.000" asserts="0">
+            <results>
+              <test-case name="TestTradeLink.TestWMUtil.Packing" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

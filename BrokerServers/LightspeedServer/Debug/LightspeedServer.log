@@ -1,0 +1,13 @@
+﻿Build started 12/13/2011 10:30:43 PM.
+     1>Project "C:\dev\tradelink\BrokerServers\LightspeedServer\LightspeedServer.vcxproj" on node 2 (rebuild target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\LightspeedServer.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\dev\tradelink\BrokerServers\..\..\..\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _USRDLL /D _WINDLL /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\LightspeedServer.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+     1>c:\dev\tradelink\brokerservers\lightspeedserver\stdafx.h(56): fatal error C1083: Cannot open include file: 'LightspeedTrader/LightspeedTrader.h': No such file or directory
+     1>Done Building Project "C:\dev\tradelink\BrokerServers\LightspeedServer\LightspeedServer.vcxproj" (rebuild target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:02.37

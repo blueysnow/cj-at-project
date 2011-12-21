@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="TWSServer">
+</Property><Property Name="Solution File" Value="C:\dev\tradelink\BrokerServers\TWSServer\TWSServer.sln">
+</Property><Property Name="Date" Value="Sunday, December 11, 2011">
+</Property><Property Name="Time" Value="20:08:19 PM">
+</Property></Properties><Event ErrorLevel="3" Project="TWSServer" Source="TWSServer.vcproj" Description="No Conversion Required">
+</Event></UpgradeLog>

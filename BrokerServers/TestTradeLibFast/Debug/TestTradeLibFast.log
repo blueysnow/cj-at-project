@@ -1,0 +1,38 @@
+﻿Build started 12/13/2011 10:32:34 PM.
+     1>Project "C:\dev\tradelink\BrokerServers\TestTradeLibFast\TestTradeLibFast.vcxproj" on node 3 (rebuild target(s)).
+     1>_PrepareForClean:
+         Deleting file "Debug\TestTradeLibFast.lastbuildstate".
+       InitializeBuildStatus:
+         Touching "Debug\TestTradeLibFast.unsuccessfulbuild".
+       ClCompile:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../TradeLibFast /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _AFXEXT /D _WINDLL /D _MBCS /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\TestTradeLibFast.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../TradeLibFast /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _AFXEXT /D _WINDLL /D _MBCS /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\TestTradeLibFast.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt TestTLImbalance.cpp TestTLMarketBasket.cpp TestTLOrder.cpp TestTLPacket.cpp TestTLPosition.cpp TestTLSecurity.cpp TestTLTick.cpp TestTLTrade.cpp TestTLWM.cpp TestTradeLibFast.cpp TestUtil.cpp ..\TradeLibFast\Util.cpp
+         Util.cpp
+         TestUtil.cpp
+     1>c:\dev\tradelink\brokerservers\testtradelibfast\testutil.cpp(2): fatal error C1083: Cannot open include file: 'cfix.h': No such file or directory
+         TestTradeLibFast.cpp
+         TestTLWM.cpp
+     1>c:\dev\tradelink\brokerservers\testtradelibfast\testtlwm.cpp(2): fatal error C1083: Cannot open include file: 'cfix.h': No such file or directory
+         TestTLTrade.cpp
+     1>c:\dev\tradelink\brokerservers\testtradelibfast\testtltrade.cpp(2): fatal error C1083: Cannot open include file: 'cfix.h': No such file or directory
+         TestTLTick.cpp
+     1>c:\dev\tradelink\brokerservers\testtradelibfast\testtltick.cpp(2): fatal error C1083: Cannot open include file: 'cfix.h': No such file or directory
+         TestTLSecurity.cpp
+     1>c:\dev\tradelink\brokerservers\testtradelibfast\testtlsecurity.cpp(2): fatal error C1083: Cannot open include file: 'cfix.h': No such file or directory
+         TestTLPosition.cpp
+     1>c:\dev\tradelink\brokerservers\testtradelibfast\testtlposition.cpp(2): fatal error C1083: Cannot open include file: 'cfix.h': No such file or directory
+         TestTLPacket.cpp
+     1>c:\dev\tradelink\brokerservers\testtradelibfast\testtlpacket.cpp(2): fatal error C1083: Cannot open include file: 'cfix.h': No such file or directory
+         TestTLOrder.cpp
+     1>c:\dev\tradelink\brokerservers\testtradelibfast\testtlorder.cpp(2): fatal error C1083: Cannot open include file: 'cfix.h': No such file or directory
+         TestTLMarketBasket.cpp
+     1>c:\dev\tradelink\brokerservers\testtradelibfast\testtlmarketbasket.cpp(2): fatal error C1083: Cannot open include file: 'cfix.h': No such file or directory
+         TestTLImbalance.cpp
+     1>c:\dev\tradelink\brokerservers\testtradelibfast\testtlimbalance.cpp(2): fatal error C1083: Cannot open include file: 'cfix.h': No such file or directory
+         Generating Code...
+     1>Done Building Project "C:\dev\tradelink\BrokerServers\TestTradeLibFast\TestTradeLibFast.vcxproj" (rebuild target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:06.28

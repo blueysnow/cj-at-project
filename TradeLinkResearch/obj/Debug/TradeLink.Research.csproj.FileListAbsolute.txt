@@ -1,0 +1,14 @@
+C:\dev\tradelink\TradeLinkResearch\bin\Debug\EarlyClose.csv
+C:\dev\tradelink\TradeLinkResearch\bin\Debug\TradeLinkResearch.dll
+C:\dev\tradelink\TradeLinkResearch\bin\Debug\TradeLinkResearch.pdb
+C:\dev\tradelink\TradeLinkResearch\bin\Debug\TradeLinkAPI.dll
+C:\dev\tradelink\TradeLinkResearch\bin\Debug\TradeLinkCommon.dll
+C:\dev\tradelink\TradeLinkResearch\bin\Debug\TradeLinkAPI.pdb
+C:\dev\tradelink\TradeLinkResearch\bin\Debug\TradeLinkCommon.pdb
+C:\dev\tradelink\TradeLinkResearch\obj\Debug\ResolveAssemblyReference.cache
+C:\dev\tradelink\TradeLinkResearch\obj\Debug\TradeLink.Research.FetchBasket.resources
+C:\dev\tradelink\TradeLinkResearch\obj\Debug\TradeLink.Research.Properties.Resources.resources
+C:\dev\tradelink\TradeLinkResearch\obj\Debug\GenerateResource.read.1.tlog
+C:\dev\tradelink\TradeLinkResearch\obj\Debug\GenerateResource.write.1.tlog
+C:\dev\tradelink\TradeLinkResearch\obj\Debug\TradeLinkResearch.dll
+C:\dev\tradelink\TradeLinkResearch\obj\Debug\TradeLinkResearch.pdb

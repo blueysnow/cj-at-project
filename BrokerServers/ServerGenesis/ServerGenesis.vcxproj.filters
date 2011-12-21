@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{3f1437b3-be8e-4646-bd30-b7bb8768f4f5}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="GenesisApi">
+      <UniqueIdentifier>{ef129f72-a31b-404b-96b4-5701090bdb20}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\TestAPI.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\TestAPI.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="GenesisServer.Config.txt" />
+    <None Include="GenesisServer.Login.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\INC\GMMID.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTAccount.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTAPI.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTAPI_API.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTAskList.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTBidList.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTCancel.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTChat.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTErrMsg.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTExecMsg.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTLevel1.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTLevel2.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTLevel2Box.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTLevel2List.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTOpenPosition.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTOrder.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTPending.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTPendingBook.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTPopup.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTPrint.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTReject.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTSending.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTSession.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTSetting.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTStock.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTTrade.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INC\GTUser.h">
+      <Filter>GenesisApi</Filter>
+    </ClInclude>
+    <ClInclude Include="GTWrap.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="ServerGenesis.h" />
+    <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="StkWrap.h" />
+    <ClInclude Include="TestAPI.h" />
+    <ClInclude Include="TestAPIDlg.h" />
+    <ClInclude Include="..\TradeLibFast\Util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GTWrap.cpp" />
+    <ClCompile Include="ServerGenesis.cpp" />
+    <ClCompile Include="StdAfx.cpp" />
+    <ClCompile Include="StkWrap.cpp" />
+    <ClCompile Include="TestAPI.cpp" />
+    <ClCompile Include="TestAPIDlg.cpp" />
+    <ClCompile Include="..\TradeLibFast\Util.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TestAPI.rc" />
+  </ItemGroup>
+</Project>
