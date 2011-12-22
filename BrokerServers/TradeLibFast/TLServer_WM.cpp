@@ -184,7 +184,7 @@ namespace TradeLibFast
 	BOOL TLServer_WM::OnCopyData(CWnd* pWnd, COPYDATASTRUCT* pCopyDataStruct)
 	{
 		CString msg = (LPCTSTR)(pCopyDataStruct->lpData);
-		D();
+//		D();
 		int type = (int)pCopyDataStruct->dwData;
 		switch (type)
 		{
