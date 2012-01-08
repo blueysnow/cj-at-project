@@ -249,7 +249,7 @@ namespace TradeLink.Common
             t.ex = r[(int)TickField.tex];
             t.be = r[(int)TickField.bidex];
             t.oe = r[(int)TickField.askex];
-            t.datetime = t.date * 1000000 + t.time;
+            t.datetime = (long)(t.date) * 1000000 + (long)t.time;
             return t;
         }
 

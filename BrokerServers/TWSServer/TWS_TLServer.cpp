@@ -13,7 +13,6 @@
 
 
 
-
 namespace TradeLibFast
 {
 	const char* CONFIGFILE = "TwsServer.Config.txt";
@@ -139,7 +138,7 @@ namespace TradeLibFast
 		m_nextsocket = FIRSTSOCKET;
 		IGNOREERRORS = true;
 
-
+		cjDebug("Findme 5");
 		for (int idx = 0; idx<maxsockets; idx++)
 		{
 			m_link.push_back(new EClientSocket(this)); // create socket instance
@@ -153,6 +152,7 @@ namespace TradeLibFast
 			}
 			m_link[idx]->reqAccountUpdates(true,_T("")); // get account names for this link
 			CString time = m_link[idx]->TwsConnectionTime();
+			cjDebug(time);
 			msg.Format(" port: %i",m_nextsocket);
 			if (time.GetLength()>0)
 			{
@@ -199,6 +199,7 @@ namespace TradeLibFast
 	
 	void gettime(int tltime, std::vector<int>& r)
 	{
+	//	cjDebug("Findme 6");
 		int sec = tltime % 100;
 		r.push_back(sec);
 		int n = (tltime - sec)/100;
@@ -209,6 +210,7 @@ namespace TradeLibFast
 	}
 	void getdate(int tldate, std::vector<int>& r)
 	{
+	//	cjDebug("Findme 7");
 		int day = tldate % 100;
 		r.push_back(day);
 		int n = (tldate - day)/100;
@@ -292,6 +294,7 @@ namespace TradeLibFast
 		double high, double low,double close, int volume, 
 		int barCount, double WAP, int hasGaps) 
 	{
+		cjDebug("Findme 7");
 		// get date from bar
 		CString dates = CString(datestring);
 		int64 unix = _atoi64(dates.GetBuffer());
@@ -461,6 +464,11 @@ namespace TradeLibFast
 
 	int TWS_TLServer::SendOrder(TLOrder o)
 	{
+		cjDebug(CString("Findme 9"));
+		CString cjstr;
+		cjstr.Format("order time %d, sym %s, cur %s, exc %s", o.time, o.symbol, o.currency, o.exchange);
+		cjDebug(cjstr);
+
 		// check our order
 		if (o.symbol=="") 
 			return UNKNOWN_SYMBOL;
@@ -626,6 +634,7 @@ namespace TradeLibFast
 	void TWS_TLServer::openOrder( OrderId orderId, const Contract& contract,
 								const Order& order, const OrderState& orderState)
 	{
+		cjDebug("Findme 8");
 		// log warnings
 		if (orderState.warningText!="")
 		{
@@ -736,6 +745,13 @@ namespace TradeLibFast
 		return OK;
 	}
 
+	void TWS_TLServer::cjDebug(const CString &str)
+	{
+		CString msg;
+		msg.Format("my Debug Msg: %s", str);
+		D(msg);
+	}
+
 	void TWS_TLServer::winError( const CString &str, int lastError)
 	{
 		D(str);
@@ -754,8 +770,66 @@ namespace TradeLibFast
 		else D(msg); // print other errors
 	}
 
+	void TWS_TLServer::execDetails( int reqId, const Contract& contract, const Execution& execution) 
+	{ 
+		cjDebug("Findme 8");
+		// convert to a tradelink trade
+		TLTrade trade;
+		trade.currency = contract.currency;
+		trade.account = execution.acctNumber;
+		trade.exchange = contract.exchange;
+		trade.id = IB2TLID(reqId);
+		trade.xprice = execution.price;
+		trade.xsize = execution.shares;
+		trade.side = execution.side=="BOT";
+		trade.security = contract.secType;
+		if (trade.security==CString("OPT"))
+		{
+			CString m;
+			m.Format("%s %s %s %f OPT",contract.symbol,contract.expiry,(contract.right==CString("C")) ? "CALL" : "PUT",contract.strike);
+			trade.symbol = m;
+		}
+		if (trade.security==CString("FOP"))
+		{
+			CString m;
+			m.Format("%s %s %s %f FOP",contract.symbol,contract.expiry,(contract.right==CString("C")) ? "CALL" : "PUT",contract.strike);
+			trade.symbol = m;
+		}
+		else if (fillnotifyfullsymbol)
+		{
+			int idx = getsymbolindex(contract.localSymbol);
+			if (idx<0)
+			{
+				trade.localsymbol = contract.localSymbol;
+				trade.symbol = contract.localSymbol;
+			}
+			else
+			{
+				trade.symbol = stockticks[idx].sym;
+				trade.localsymbol = stockticks[idx].sym;
+			}
+
+		}
+		else
+		{
+			trade.localsymbol = contract.localSymbol;
+			trade.symbol = contract.localSymbol;
+		}
 
 
+		// convert date and time
+		std::vector<CString> r;
+		std::vector<CString> r2;
+		gsplit(execution.time," ",r);
+		gsplit(r[2],":",r2);
+		int sec = atoi(r2[2]);
+		trade.xdate = atoi(r[0]);
+		trade.xtime = (atoi(r2[0])*10000)+(atoi(r2[1])*100)+sec;
+		if (contract.secType!="BAG") 
+			this->SrvGotFill(trade);
+
+	}
+	/*
 	void TWS_TLServer::execDetails( OrderId orderId, const Contract& contract, const Execution& execution) 
 	{ 
 		// convert to a tradelink trade
@@ -814,7 +888,7 @@ namespace TradeLibFast
 			this->SrvGotFill(trade);
 
 	}
-
+*/
 	int TWS_TLServer::getsymbolindex(CString symbol)
 	{
 		TLSecurity sec = TLSecurity::Deserialize(symbol);
@@ -1023,6 +1097,9 @@ namespace TradeLibFast
 
 	void TWS_TLServer::tickPrice( TickerId tickerId, TickType tickType, double price, int canAutoExecute) 
 	{ 
+		//CString cjstr;
+		//cjstr.Format("findme 1 tick price %f", price);
+		//cjDebug(cjstr);
 		if ((tickerId>=0)&&(tickerId<(TickerId)stockticks.size()) && needStock(stockticks[tickerId].sym))
 		{
 			time_t now;
@@ -1060,6 +1137,9 @@ namespace TradeLibFast
 
 	void TWS_TLServer::tickSize( TickerId tickerId, TickType tickType, int size) 
 	{ 
+		//CString cjstr;
+		//cjstr.Format("findme 2 tick size %d", size);
+		//cjDebug(cjstr);
 		if ((tickerId>=0)&&(tickerId<(TickerId)stockticks.size()) && needStock(stockticks[tickerId].sym))
 		{
 			time_t now;
@@ -1169,6 +1249,7 @@ namespace TradeLibFast
 	//ILDEBEGIN
 	void TWS_TLServer::updateMktDepth( TickerId id, int position, int operation, int side, double price, int size)
 	{
+		cjDebug("Findme 3");
 		if ((id>=0)&&(id<(TickerId)stockticks.size()) && needStock(stockticks[id].sym))
 		{
 			time_t now;
@@ -1205,6 +1286,7 @@ namespace TradeLibFast
 	void TWS_TLServer::updateMktDepthL2( TickerId id, int position, CString marketMaker, int operation, 
 			int side, double price, int size) 
 	{ 
+		cjDebug("Findme 4");
 		if ((id>=0)&&(id<(TickerId)stockticks.size()) && needStock(stockticks[id].sym))
 		{
 			time_t now;
@@ -1238,8 +1320,8 @@ namespace TradeLibFast
 	}
 	//ILDEEND
 
-	void TWS_TLServer::tickOptionComputation( TickerId ddeId, TickType field, double impliedVol,
-		double delta, double modelPrice, double pvDividend) { }
+	void TWS_TLServer::tickOptionComputation( TickerId tickerId, TickType tickType, double impliedVol, double delta,
+	   double optPrice, double pvDividend, double gamma, double vega, double theta, double undPrice)  { }
 	void TWS_TLServer::tickGeneric(TickerId tickerId, TickType tickType, double value) { }
 	void TWS_TLServer::tickString(TickerId tickerId, TickType tickType, const CString& value) { }
 	void TWS_TLServer::tickEFP(TickerId tickerId, TickType tickType, double basisPoints,
@@ -1266,6 +1348,12 @@ namespace TradeLibFast
 	   long volume, double wap, int count) { }
 	void TWS_TLServer::currentTime(long time) {}
 	void TWS_TLServer::fundamentalData(TickerId reqId, const CString& data) {}
+
+	void TWS_TLServer::openOrderEnd() {}
+	void TWS_TLServer::accountDownloadEnd(const CString& accountName) {}
+	void TWS_TLServer::execDetailsEnd( int reqId) {}
+	void TWS_TLServer::deltaNeutralValidation(int reqId, const UnderComp& underComp) {}
+	void TWS_TLServer::tickSnapshotEnd( int reqId) {}
 
 	//ILDEBEGIN: 
 	//*We are requesting market depth for each registered stock

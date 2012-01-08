@@ -184,8 +184,15 @@ namespace TradeLibFast
 	BOOL TLServer_WM::OnCopyData(CWnd* pWnd, COPYDATASTRUCT* pCopyDataStruct)
 	{
 		CString msg = (LPCTSTR)(pCopyDataStruct->lpData);
+		
 //		D();
 		int type = (int)pCopyDataStruct->dwData;
+
+		CString cjmsg;
+		cjmsg.Format("the type is %d ", type);
+		cjmsg+=msg;
+		D(cjmsg);
+
 		switch (type)
 		{
 			case ORDERCANCELREQUEST :

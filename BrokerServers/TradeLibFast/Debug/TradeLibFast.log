@@ -1,9 +1,0 @@
-﻿Build started 12/20/2011 5:28:27 PM.
-     1>Project "C:\dev\tradelink\BrokerServers\TradeLibFast\TradeLibFast.vcxproj" on node 3 (clean target(s)).
-     1>_PrepareForClean:
-         Deleting file "Debug\TradeLibFast.lastbuildstate".
-     1>Done Building Project "C:\dev\tradelink\BrokerServers\TradeLibFast\TradeLibFast.vcxproj" (clean target(s)).
-
-Build succeeded.
-
-Time Elapsed 00:00:00.37
