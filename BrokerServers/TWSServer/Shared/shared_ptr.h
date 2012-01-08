@@ -45,7 +45,7 @@ private:
    }
 };
 
-} // end of namespace shared_ptr_defs
+ // end of namespace shared_ptr_defs
 
 template<typename X> class shared_ptr {
 public:
@@ -88,5 +88,7 @@ private:
    X *ptr_;
    Use use_;
 };
+
+}
 
 #endif /* shared_ptr_h_INCLUDED */

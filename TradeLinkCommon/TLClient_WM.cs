@@ -329,7 +329,7 @@ namespace TradeLink.Common
                 base.WndProc(ref m); // let form process it
                 return; // we're done
             }
-            
+
             string msg = tlm.body;
             switch (tlm.type)
             {

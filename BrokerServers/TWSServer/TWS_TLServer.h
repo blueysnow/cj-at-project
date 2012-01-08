@@ -1,7 +1,7 @@
 #pragma once
 #include "TradeLink.h"
 #include "EWrapper.h"
-#include "eclientsocket.h"
+#include "EClientSocket.h"
 #include "TLOrder.h"
 #include <vector>
 #include "orderstate.h"
@@ -9,6 +9,8 @@
 #include "TLServer_IP.h"
 #include "BarRequest.h"
 
+
+//typedef CString CString;
 
 namespace TradeLibFast
 {
@@ -90,8 +92,8 @@ namespace TradeLibFast
 		// these are the IB-api methods we'll override (from EWrapper above)
 		void tickPrice( TickerId ddeId, TickType field, double price, int canAutoExecute);
 		void tickSize( TickerId ddeId, TickType field, int size);
-		void tickOptionComputation( TickerId ddeId, TickType field, double impliedVol,
-			double delta, double modelPrice, double pvDividend);
+		void tickOptionComputation( TickerId tickerId, TickType tickType, double impliedVol, double delta,
+	   double optPrice, double pvDividend, double gamma, double vega, double theta, double undPrice) ;
 		void tickGeneric(TickerId tickerId, TickType tickType, double value);
 		void tickString(TickerId tickerId, TickType tickType, const CString& value);
 		void tickEFP(TickerId tickerId, TickType tickType, double basisPoints,
@@ -101,7 +103,9 @@ namespace TradeLibFast
 			double avgFillPrice, int permId, int parentId, double lastFillPrice,
 			int clientId, const CString& whyHeld);
 		void openOrder( OrderId orderId, const Contract&, const Order&, const OrderState&);
+void openOrderEnd();
 		void winError( const CString &str, int lastError);
+		void cjDebug(const CString &str);
 		void connectionClosed();
 		void updateAccountValue(const CString &key, const CString &val,
 			const CString &currency, const CString &accountName);
@@ -109,17 +113,21 @@ namespace TradeLibFast
 			double marketPrice, double marketValue, double averageCost,
 			double unrealizedPNL, double realizedPNL, const CString &accountName);
 		void updateAccountTime(const CString &timeStamp);
+void accountDownloadEnd(const CString& accountName);
 		void nextValidId( OrderId orderId);
 		void contractDetails( int reqId, const ContractDetails& contractDetails);
 		void bondContractDetails( int reqId, const ContractDetails& contractDetails);
 		void contractDetailsEnd( int reqId);
-		void execDetails( OrderId orderId, const Contract& contract, const Execution& execution);
+		//void execDetails( OrderId orderId, const Contract& contract, const Execution& execution);
+		void execDetails( int reqId, const Contract& contract, const Execution& execution);
+void execDetailsEnd( int reqId);
 		void error(const int id, const int errorCode, const CString errorString);
 
 		void updateMktDepth( TickerId id, int position, int operation, int side, 
 				double price, int size);
 		void updateMktDepthL2( TickerId id, int position, CString marketMaker, int operation, 
 				int side, double price, int size);
+
 		void updateNewsBulletin(int msgId, int msgType, const CString& newsMessage, const CString& originExch);
 		void managedAccounts(const CString& accountsList);
 		void receiveFA(faDataType pFaDataType, const CString& cxml);
@@ -133,6 +141,8 @@ namespace TradeLibFast
 		   long volume, double wap, int count);
 		void currentTime(long time);
 		void fundamentalData(TickerId reqId, const CString& data);
+void deltaNeutralValidation(int reqId, const UnderComp& underComp);
+void tickSnapshotEnd( int reqId);
 
 		//BEGINILDE
 		CString clientname_;

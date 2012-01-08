@@ -19,3 +19,6 @@ C:\dev\tradelink\Replay\obj\Debug\GenerateResource.read.1.tlog
 C:\dev\tradelink\Replay\obj\Debug\GenerateResource.write.1.tlog
 C:\dev\tradelink\Replay\obj\Debug\Replay.exe
 C:\dev\tradelink\Replay\obj\Debug\Replay.pdb
+C:\dev\my-tradelink-ib\Replay\bin\Debug\Replay.exe.config
+C:\dev\my-tradelink-ib\Replay\obj\Debug\Replay.exe
+C:\dev\my-tradelink-ib\Replay\obj\Debug\Replay.pdb
