@@ -138,7 +138,6 @@ namespace TradeLibFast
 		m_nextsocket = FIRSTSOCKET;
 		IGNOREERRORS = true;
 
-		cjDebug("Findme 5");
 		for (int idx = 0; idx<maxsockets; idx++)
 		{
 			m_link.push_back(new EClientSocket(this)); // create socket instance
@@ -199,7 +198,6 @@ namespace TradeLibFast
 	
 	void gettime(int tltime, std::vector<int>& r)
 	{
-	//	cjDebug("Findme 6");
 		int sec = tltime % 100;
 		r.push_back(sec);
 		int n = (tltime - sec)/100;
@@ -210,7 +208,6 @@ namespace TradeLibFast
 	}
 	void getdate(int tldate, std::vector<int>& r)
 	{
-	//	cjDebug("Findme 7");
 		int day = tldate % 100;
 		r.push_back(day);
 		int n = (tldate - day)/100;
@@ -278,7 +275,7 @@ namespace TradeLibFast
 				histBarSymbols.push_back(br);
 				// notify
 				CString m;
-				m.Format("Bar request: %s end date: %s dur: %s size: %s",br.Symbol,edt,dur,bs);
+				m.Format("Bar request: %s end date: %s dur: %s size: %s RTH: %d",br.Symbol,edt,dur,bs ,histBarRTH);
 				D(m);
 
 				// request data
@@ -294,7 +291,6 @@ namespace TradeLibFast
 		double high, double low,double close, int volume, 
 		int barCount, double WAP, int hasGaps) 
 	{
-		cjDebug("Findme 7");
 		// get date from bar
 		CString dates = CString(datestring);
 		int64 unix = _atoi64(dates.GetBuffer());
@@ -464,7 +460,6 @@ namespace TradeLibFast
 
 	int TWS_TLServer::SendOrder(TLOrder o)
 	{
-		cjDebug(CString("Findme 9"));
 		CString cjstr;
 		cjstr.Format("order time %d, sym %s, cur %s, exc %s", o.time, o.symbol, o.currency, o.exchange);
 		cjDebug(cjstr);
@@ -634,7 +629,6 @@ namespace TradeLibFast
 	void TWS_TLServer::openOrder( OrderId orderId, const Contract& contract,
 								const Order& order, const OrderState& orderState)
 	{
-		cjDebug("Findme 8");
 		// log warnings
 		if (orderState.warningText!="")
 		{
@@ -772,7 +766,6 @@ namespace TradeLibFast
 
 	void TWS_TLServer::execDetails( int reqId, const Contract& contract, const Execution& execution) 
 	{ 
-		cjDebug("Findme 8");
 		// convert to a tradelink trade
 		TLTrade trade;
 		trade.currency = contract.currency;
@@ -1249,7 +1242,6 @@ namespace TradeLibFast
 	//ILDEBEGIN
 	void TWS_TLServer::updateMktDepth( TickerId id, int position, int operation, int side, double price, int size)
 	{
-		cjDebug("Findme 3");
 		if ((id>=0)&&(id<(TickerId)stockticks.size()) && needStock(stockticks[id].sym))
 		{
 			time_t now;
@@ -1286,7 +1278,6 @@ namespace TradeLibFast
 	void TWS_TLServer::updateMktDepthL2( TickerId id, int position, CString marketMaker, int operation, 
 			int side, double price, int size) 
 	{ 
-		cjDebug("Findme 4");
 		if ((id>=0)&&(id<(TickerId)stockticks.size()) && needStock(stockticks[id].sym))
 		{
 			time_t now;

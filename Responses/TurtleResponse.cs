@@ -86,7 +86,10 @@ namespace Responses
 
             // wait until we have an SMA
             if (SMA == 0)
+            {
+                D("SMA is 0; wait for some more bars.");
                 return;
+            }
 
             //ensure we aren't waiting for previous order to fill
             if (!_wait[symbol])
@@ -120,6 +123,10 @@ namespace Responses
                     // wait for fill
                     _wait[symbol] = true;
                 }
+            }
+            else
+            {
+                D("no action, waiting for previous order to fill");
             }
 
 

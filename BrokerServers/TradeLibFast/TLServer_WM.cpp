@@ -259,7 +259,12 @@ namespace TradeLibFast
 				}
 			case VERSION :
 					return MinorVer;
-			case DOMREQUEST :
+/*			case BARREQUEST :
+				{
+					for (uint i = 0; i<client.size(); i++)
+						return TLSend(type, msg, i);
+				}
+*/			case DOMREQUEST :
 				{
 				vector<CString> rec;
 				gsplit(msg,CString("+"),rec);
@@ -273,6 +278,8 @@ namespace TradeLibFast
 				}
 			default: // unknown messages
 				{
+					//cjyu
+					D("Did I come through here?");
 					int um = UnknownMessage(type,msg);
 					// issue #141
 					CString data;
