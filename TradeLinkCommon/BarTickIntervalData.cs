@@ -22,8 +22,11 @@ namespace TradeLink.Common
         {
             intervallength = unitsPerInterval;
         }
+//        long newbarCnt = 0;
         void newbar()
         {
+//            System.Diagnostics.Debug.Write("newbar counter ");
+//            System.Diagnostics.Debug.Write(++newbarCnt); System.Diagnostics.Debug.Write("\n");
             _Count++;
             ticks.Add(0);
             opens.Add(0);
@@ -34,8 +37,12 @@ namespace TradeLink.Common
             times.Add(0);
             dates.Add(0);
         }
+//        long addbarCnt = 0;
         public void addbar(Bar mybar)
         {
+//            System.Diagnostics.Debug.Write("newbar counter ");
+//            System.Diagnostics.Debug.Write(++addbarCnt); System.Diagnostics.Debug.Write("\n");
+
             _Count++;
             closes.Add(mybar.Close);
             opens.Add(mybar.Open);

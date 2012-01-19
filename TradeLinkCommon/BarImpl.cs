@@ -83,7 +83,7 @@ namespace TradeLink.Common
         public int Bartime 
         { 
             get 
-            { 
+            {                 
                 // get num of seconds elaps
                 int elap = Util.FT2FTS(_time); 
                 // get remainder of dividing by interval
@@ -94,7 +94,7 @@ namespace TradeLink.Common
                 dt = dt.AddSeconds(elap-rem);
                 // conver back to normal time
                 int bt = Util.ToTLTime(dt);
-                return bt;
+                return bt;        
             } 
         }
         public int Bardate { get { return bardate; } }
@@ -190,6 +190,8 @@ namespace TradeLink.Common
 
         public static Bar Deserialize(string msg)
         {
+            //cjyu: due to mysterious IB formatting, I am doing this on the experiment basis.
+            
             string[] r = msg.Split(',');
             decimal open = Convert.ToDecimal(r[0], System.Globalization.CultureInfo.InvariantCulture);
             decimal high = Convert.ToDecimal(r[1], System.Globalization.CultureInfo.InvariantCulture);
@@ -200,7 +202,21 @@ namespace TradeLink.Common
             int time = Convert.ToInt32(r[6]);
             string symbol = r[7];
             int interval = Convert.ToInt32(r[8]);
-            return new BarImpl(open, high, low, close, vol, date, time, symbol,interval);
+
+            switch (interval)
+            {
+                case 3600:  //hourly
+                    //formatting: 1291.125000,1292.125000,1291.125000,1292.125000,-1,20120112,230000,ESH2 GLOBEX FUT,3600
+
+                    return new BarImpl(open, high, low, close, vol, date, time, symbol, interval);
+                case 86400: //daily
+                //formatting:  13.315000,13.390000,13.155000,13.315000,-1,19700821,165504,XLF,86400
+                    return new BarImpl(open, high, low, close, vol, date, time, symbol, interval);
+                default:
+                    return new BarImpl(open, high, low, close, vol, date, time, symbol, interval);
+            }
+            
+ //           return new BarImpl(open, high, low, close, vol, date, time, symbol,interval);
         }
 
         /// <summary>

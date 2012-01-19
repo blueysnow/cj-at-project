@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System    ;
 using System.Collections.Generic;
 using System.Text;
 using TradeLink.API;
@@ -33,8 +33,11 @@ namespace TradeLink.Common
             vols.Clear();
             _Count = 0;
         }
+//        long newbarCnt = 0;
         void newbar(long id)
         {
+//            System.Diagnostics.Debug.Write("newbar counter ");
+//            System.Diagnostics.Debug.Write(++newbarCnt); System.Diagnostics.Debug.Write("\n");
             _Count++;
             opens.Add(0);
             closes.Add(0);
@@ -45,9 +48,12 @@ namespace TradeLink.Common
             dates.Add(0);
             ids.Add(id);
         }
+//        long addbarCnt = 0;
         public void addbar(Bar mybar)
         {
-            _Count++;
+//            System.Diagnostics.Debug.Write("addbar counter ");
+//            System.Diagnostics.Debug.Write(++addbarCnt); System.Diagnostics.Debug.Write("\n");
+/*            _Count++;
             closes.Add(mybar.Close);
             opens.Add(mybar.Open);
             dates.Add(mybar.Bardate);
@@ -56,6 +62,79 @@ namespace TradeLink.Common
             vols.Add(mybar.Volume);
             times.Add(mybar.Bartime);
             ids.Add(getbarid(mybar.Bartime, mybar.Bardate, intervallength));
+
+             if (mybar.Bartime != mybar.time)
+            {
+                System.Diagnostics.Debug.Write("bar not equal "+mybar.Bardate.ToString()+"\t"+mybar.Bartime.ToString()+"\t"+mybar.time.ToString()+"\n");               
+             }
+             else System.Diagnostics.Debug.Write("equal " + mybar.Bardate.ToString() + "\t" + mybar.Bartime.ToString() + "\t" + mybar.time.ToString() + "\n");
+ */
+            if (mybar.Close < 0 || mybar.Open < 0 || mybar.Low < 0 || mybar.High < 0) 
+            { 
+                System.Diagnostics.Debug.Write("bar not valid " + mybar.Bardate.ToString() + "\t" + mybar.Bartime.ToString() + "\t" + mybar.time.ToString() + "\n"); 
+                return; 
+            } //filter bad bars.
+           
+
+            if (_Count == 0)
+            {
+                _Count++;
+                closes.Add(mybar.Close);
+                opens.Add(mybar.Open);
+                dates.Add(mybar.Bardate);
+                highs.Add(mybar.High);
+                lows.Add(mybar.Low);
+                vols.Add(mybar.Volume);
+                times.Add(mybar.Bartime);
+                ids.Add(getbarid(mybar.Bartime, mybar.Bardate, intervallength));
+            }
+            else
+            {
+                if ((mybar.Bardate > dates[dates.Count - 1]) || (mybar.Bardate == dates[dates.Count - 1] && mybar.Bartime > times[times.Count - 1]))
+                {
+                    _Count++;
+                    closes.Add(mybar.Close);
+                    opens.Add(mybar.Open);
+                    dates.Add(mybar.Bardate);
+                    highs.Add(mybar.High);
+                    lows.Add(mybar.Low);
+                    vols.Add(mybar.Volume);
+                    times.Add(mybar.Bartime);
+                    ids.Add(getbarid(mybar.Bartime, mybar.Bardate, intervallength));
+                }
+                else
+                {                    
+                    int cnt = times.Count;
+                    int i;
+                    for (i = cnt - 1; i >= 0; i--)
+                    {
+                        if ((mybar.Bardate > dates[i]) || (mybar.Bardate == dates[i] && mybar.Bartime > times[i])) break;
+                    }
+                    i++;
+                    //TODO
+                    if ((mybar.Bardate == dates[i] && mybar.Bartime == times[i]))
+                    {  
+                      //FUCK! this is the place go wrong  
+                        //remove duplicate bars, or update bar with new value.
+                        closes[i] = mybar.Close;
+                        opens[i] = mybar.Open;
+                        highs[i] = mybar.High;
+                        lows[i] = mybar.Low;
+                        vols[i] = mybar.Volume;
+                        return;   
+                    }
+                    
+                    _Count++;
+                    closes.Insert(i, mybar.Close);
+                    opens.Insert(i, mybar.Open);
+                    dates.Insert(i, mybar.Bardate);
+                    highs.Insert(i, mybar.High);
+                    lows.Insert(i, mybar.Low);
+                    vols.Insert(i, mybar.Volume);
+                    times.Insert(i, mybar.Bartime);
+                    ids.Insert(i, getbarid(mybar.Bartime, mybar.Bardate, intervallength));
+                }
+            }            
         }
         long curr_barid = -1;
         int intervallength = 60;
