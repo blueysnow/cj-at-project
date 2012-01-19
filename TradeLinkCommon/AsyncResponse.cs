@@ -45,6 +45,7 @@ namespace TradeLink.Common
 
         void ReadTick()
         {
+//            System.Diagnostics.Debug.Write("Am I called here? Tick in AR");
             try
             {
                 while (_readtick)
@@ -54,6 +55,7 @@ namespace TradeLink.Common
                         GotTickQueued();
                     while (_tickcache.hasItems)
                     {
+ //                       System.Diagnostics.Debug.Write("Am I called here? Processing Tick in AR");
                         if (!_readtick)
                             break;
                         Tick k = _tickcache.Read();
@@ -187,6 +189,7 @@ namespace TradeLink.Common
 
         void ReadImbs()
         {
+            System.Diagnostics.Debug.Write("Am I called here? Imbalance in AR");
             try
             {
                 while (_readimb)

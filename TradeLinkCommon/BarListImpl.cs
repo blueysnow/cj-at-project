@@ -144,17 +144,26 @@ namespace TradeLink.Common
                 int count = bl.IntervalCount(b.Interval);
                 if (count != 0)
                 {
-                    for (int i = 0; i < count; i++)
+                    int i;
+                    for (i = 0; i < count; i++)
                     {
                         if (i == position)
                         {
                             addbar(copy, b, j);
+                            return copy;
+                           // addbar(copy, bl[i, (BarInterval)b.Interval], b.Interval);
                         }
-                        addbar(copy, bl[i, (BarInterval)b.Interval], j);
+                        //addbar(copy, bl[i, (BarInterval)b.Interval], b.Interval);
                     }
+                    addbar(copy, b, j);
+                    return copy;
                 }
                 else
-                    addbar(copy, b, 0);
+                {
+                    addbar(copy, b, j);
+                    return copy;
+                   // addbar(copy, bl[0, (BarInterval)b.Interval], b.Interval);
+                }
             }
             return copy;
         }
@@ -430,6 +439,11 @@ namespace TradeLink.Common
         {
             // only pay attention to trades and indicies
             if (k.trade == 0) return;
+
+            //cjyu
+    //        if (k.date < 19710000) return;
+
+
             // make sure we have a symbol defined 
             if (!_valid)
             {
@@ -500,6 +514,8 @@ namespace TradeLink.Common
         {
             b._intdata[instdataidx].addbar(mybar);
         }
+
+
         private const string AMEX = ":AMEX";
         /// <summary>
         /// Populate the day-interval barlist of this instance from a URL, where the results are returned as a CSV file.  URL should accept requests in the form of http://url/get.py?sym=IBM
@@ -748,6 +764,41 @@ histperiod=daily&startdate=" + startdate + "&enddate=" + enddate + "&output=csv&
             }
             // first bar
             return -1;
+        }
+        /// <summary>
+        /// check if bar already exists in current bar list (assumes same day)
+        /// </summary>
+        /// <param name="chart"></param>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        public static Boolean BarExists(BarList chart, Bar b)
+        {
+            
+            System.Diagnostics.Debug.Write("HellofromBarExists\t");
+            System.Diagnostics.Debug.Write(b.Bardate); System.Diagnostics.Debug.Write("\t");
+            System.Diagnostics.Debug.Write(b.time); System.Diagnostics.Debug.Write("\n");
+            long date = b.Bardate;
+            int time = b.time;
+            // look for same bar. This should occur mostly in backfilling. So when dealing with realtime data, there could still be multiple ticks/bars with the same timestamp.
+            for (int j = chart.Last; (j >= chart.First); j--)
+            {
+  /*
+                long chartDate = chart.Date()[j];
+                int chartTime = chart.Time()[j];
+                if (chart.Date()[j] > date) continue;
+                if (chart.Time()[j] > time) continue;
+                */
+                if (chart.Date()[j] > date) continue;
+                if (chart.Date()[j] == date && chart.Time()[j] > time) continue;
+                else
+                {
+                    if (chart.Date()[j] < date) return false;
+                    if (chart.Date()[j] == date && chart.Time()[j] == time) return true;
+                    if (chart.Date()[j] == date && chart.Time()[j] < time) return false;
+                }
+            }
+            //no hit
+            return false; 
         }
         /// <summary>
         /// gets preceeding bar by time (assumes same day)

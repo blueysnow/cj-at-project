@@ -82,6 +82,7 @@ namespace TradeLink.Common
 
         public virtual bool GotMessage(MessageTypes type, long source, long dest, long msgid, string request, ref string response)
         {
+            
             long lv = 0;
             switch (type)
             {
@@ -191,6 +192,11 @@ namespace TradeLink.Common
                             {
                                 // get bar list
                                 BarList bl = BLT[b.Symbol, b.Interval];
+                                //cjyu
+                                //return if bar already exists
+                                //if (BarListImpl.BarExists(bl, b))
+                                  //  return true;
+
                                 // get nearest intrday bar
                                 int preceed = BarListImpl.GetBarIndexPreceeding(bl, b.Bardate, b.Bartime);
                                 // increment by one to get new position
