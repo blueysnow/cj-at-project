@@ -40,19 +40,20 @@ namespace Responses
         #hint showBubbles: Display or hide Turtle price bubbles
         #hint slippagePerRoundTripDollars: Amount deducted from each round trip trade profit to account for slippage and commissions
          */
-        const int System_One = 1; const int System_Two = 2; const int Automatic_Sizing = 0; const int Manual_Sizing = 1; const int Automatic_Tick_Value = 0; const int Manual_Tick_Value = 1;
-        int TurtleSystem = System_One;
+//        const int System_One = 1; const int System_Two = 2; const int Automatic_Sizing = 0; const int Manual_Sizing = 1; const int Automatic_Tick_Value = 0; const int Manual_Tick_Value = 1;
+        public enum SystemType { System_One=1, System_Two };
+        public enum UnitSizing { Automatic_Sizing, Manual_Sizing };
+        public enum TickValue { Automatic_Tick_Value, Manual_Tick_Value }
+        SystemType TurtleSystem = SystemType.System_One;
         //int statusPanel = {default CurrentStats, PositionSizing, Historical};
 
         int manualTradeUnit = 1;
         double manualTickValue = 5.0;
-        int unitSizing = Manual_Sizing;
-        int tickValue = Automatic_Tick_Value;
+        UnitSizing unitSizing = UnitSizing.Manual_Sizing;
+        TickValue tickValue = TickValue.Automatic_Tick_Value;
         bool skipConsecutiveTrades = false;
         bool showBubbles = true;
         double slippagePerRoundTripDollars = 0.0;
-
-        
 
         bool _black = false;
         // this function is called the constructor, because it sets up the response
@@ -105,17 +106,21 @@ namespace Responses
         decimal failSafeLongEntry = 0;  decimal failSafeShortEntry = 9999999999999999999999999999m;
         decimal shortExit = 0;  decimal longExit = 9999999999999999999999999999m;
         decimal longStop = 0;   decimal shortStop = 0;
-        int trade = 0; decimal entry = -1; decimal exit = -1; decimal tradeProfitPoints = -1; decimal stop = -1; decimal entryUnits = -1; decimal lastTrade = -1;
-
+        decimal entry = -1; decimal exit = -1; decimal tradeProfitPoints = -1; decimal stop = -1; decimal entryUnits = -1; decimal lastTrade = -1;
+        public enum trade { Init, Flat, Long, Short, SkipLong, SkipShort };
+        internal List<trade> trades = new List<trade>();
         void blt_GotNewBar(string symbol, int interval)
         {
             // lets do our entries.  
 
             int idx = _active.getindex(symbol);
-
-            if (blt[symbol].Count < ATRLength)
+            BarList myBarList = blt[symbol];
+            Bar myBar = myBarList.RecentBar;
+            int barCount = myBarList.Count;   int lastBar = barCount - 1;
+            decimal high = myBar.High; decimal low = myBar.Low; decimal close = myBar.Close; decimal open = myBar.Open;
+            if (barCount < ATRLength)
             {
-                D("Error: waiting for more bars. or you can request history data"); return;
+                D("Error: waiting for more bars. or you can request more history data"); return;
             }
 
             // calculate the SMA using closing prices for so many bars back
@@ -125,23 +130,24 @@ namespace Responses
     
             switch(TurtleSystem){
     
-                case System_One:
+                case SystemType.System_One:
+
+                    if(trades.Count == 0) //essential trade.Init
+                    {
+                        lastTrade = 0;  entry = 0;  exit = 0;   
+                        trade flatTrade = trade.Flat;
+                        trades.Add(flatTrade);
+                        tradeProfitPoints = 0;
+                        stop = 0;
+                        entryUnits = unit;
+                    }
+                    break;
     
-                    switch(trade[1]){
+                    switch(trades[trades.Count-1])
+                    {
+                        case trade.Flat:
             
-            case init:
-                
-                lastTrade = 0;
-                entry = 0;
-                exit = 0;
-                trade = if barNumber() >=1 then trade.flat else trade.init;
-                tradeProfitPoints = 0;
-                stop = 0;
-                entryUnits = unit;
-                        
-            case flat:
-            
-                if ((high > longEntry and lastTrade[1] == 1 and high < failSafeLongEntry)  and skipConsecutiveTrades) then
+                if ((high > longEntry && lastTrade[1] == 1 && high < failSafeLongEntry)  && skipConsecutiveTrades)
                 {
                     entry = max(longEntry+oneTick, low);
                     exit = 0;
@@ -150,9 +156,8 @@ namespace Responses
                     stop = entry - ATRMultiplier*atr;
                     entryUnits = 0;
                     lastTrade = 0;
-                }
-                
-                else if (( (low < shortEntry and lastTrade[1] == 1 and low > failSafeShortEntry)) and skipConsecutiveTrades) then
+                }                
+                else if (( (low < shortEntry && lastTrade[1] == 1 && low > failSafeShortEntry)) && skipConsecutiveTrades)
                 {
                     entry = min(shortEntry-oneTick, high);
                     exit = 0;
@@ -161,9 +166,8 @@ namespace Responses
                     stop = entry+ATRMultiplier*atr;
                     entryUnits = 0;
                     lastTrade = 0;
-                }
-        
-                   else if high > longEntry then 
+                }        
+                else if (high > longEntry)
                 {
                     entry = max(longEntry+oneTick, low);
                     exit = 0;
@@ -171,11 +175,9 @@ namespace Responses
                     tradeProfitPoints = 0;
                     stop = entry-ATRMultiplier*atr;
                     entryUnits = unit;
-                    lastTrade = 0;
-                   
-                }    
-               
-                else if low < shortEntry then 
+                    lastTrade = 0;                   
+                }                   
+                else if (low < shortEntry) 
                 {
                     entry = min(shortEntry-oneTick, high);
                     exit = 0;
@@ -184,8 +186,7 @@ namespace Responses
                     stop = entry+ATRMultiplier*atr;
                     entryUnits = unit;
                     lastTrade = 0;
-                } 
-            
+                }             
                 else 
                 {
                     entry = 0;
@@ -197,9 +198,9 @@ namespace Responses
                     lastTrade = lastTrade[1]; 
                 }
         
-            case long:
+            case trade.Long:
                 entryUnits = entryUnits[1];
-                if low < longExit or low < stop[1] then
+                if (low < longExit || low < stop[1])
                 {
                     exit = min(open, max(longExit-oneTick, stop[1]-oneTick));
                     entry = entry[1];
@@ -207,7 +208,7 @@ namespace Responses
                     tradeProfitPoints = exit - entry[1];
                     stop = double.nan;
                     lastTrade = if tradeProfitPoints > 0 then 1 else 0;               
-                    } 
+                } 
                 else
                 {
                     exit = 0;
@@ -216,11 +217,10 @@ namespace Responses
                     tradeProfitPoints = 0;
                     stop = stop[1];
                     lastTrade = lastTrade[1];
-                }
-        
-            case short:
+                }        
+            case trade.Short:
                  entryUnits = entryUnits[1];
-                 if high > shortExit or high > stop[1] then
+                 if (high > shortExit || high > stop[1])
                 {
                     exit = max(open, min(shortExit+oneTick, stop[1]+oneTick));
                     entry = entry[1];
@@ -237,8 +237,7 @@ namespace Responses
                     tradeProfitPoints = 0;
                     stop = stop[1];
                     lastTrade = lastTrade[1];
-                }
-        
+                }        
             case skipLong:
                 if low < longExit or low < stop[1] then
                 {
