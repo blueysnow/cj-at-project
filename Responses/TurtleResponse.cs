@@ -101,14 +101,14 @@ namespace Responses
         int accountSize = 100000;   // To be updated from account query
         double accountRiskPercent = 1.0;
         int entryLength = 20;   int exitLength = 10;    int failSafeEntryLength = 55;
-        int ATRLength = 20; double ATRMultiplier = 2.0; decimal ATR = 0;
+        int ATRLength = 20; decimal ATRMultiplier = 2.0m; decimal ATR = 0;
         decimal longEntry = 0;  decimal shortEntry = 9999999999999999999999999999m;
         decimal failSafeLongEntry = 0;  decimal failSafeShortEntry = 9999999999999999999999999999m;
         decimal shortExit = 0;  decimal longExit = 9999999999999999999999999999m;
         decimal longStop = 0;   decimal shortStop = 0;
         decimal entry = -1; decimal exit = -1; decimal tradeProfitPoints = -1; decimal stop = -1; decimal entryUnits = -1; decimal lastTrade = -1;
-        public enum trade { Init, Flat, Long, Short, SkipLong, SkipShort };
-        internal List<trade> trades = new List<trade>();
+        public enum trade { Init, Flat, GoLong, GoShort, SkipLong, SkipShort };
+        internal List<trade> allTrades = new List<trade>();
         void blt_GotNewBar(string symbol, int interval)
         {
             // lets do our entries.  
@@ -117,7 +117,10 @@ namespace Responses
             BarList myBarList = blt[symbol];
             Bar myBar = myBarList.RecentBar;
             int barCount = myBarList.Count;   int lastBar = barCount - 1;
-            decimal high = myBar.High; decimal low = myBar.Low; decimal close = myBar.Close; decimal open = myBar.Open;
+            decimal myHigh = myBar.High; decimal myLow = myBar.Low; decimal myClose = myBar.Close; decimal myOpen = myBar.Open;
+            decimal oneTick = 0.25m;    //this is hard-coded for ES contracts
+            trade myTrade;
+            int units = 1;
             if (barCount < ATRLength)
             {
                 D("Error: waiting for more bars. or you can request more history data"); return;
@@ -132,282 +135,281 @@ namespace Responses
     
                 case SystemType.System_One:
 
-                    if(trades.Count == 0) //essential trade.Init
+                    if(allTrades.Count == 0) //essential trade.Init
                     {
                         lastTrade = 0;  entry = 0;  exit = 0;   
-                        trade flatTrade = trade.Flat;
-                        trades.Add(flatTrade);
+                        myTrade = trade.Flat;
+                        allTrades.Add(myTrade);
                         tradeProfitPoints = 0;
                         stop = 0;
-                        entryUnits = unit;
+                        entryUnits = units; //using this for now. 
                     }
                     break;
     
-                    switch(trades[trades.Count-1])
+                    switch(allTrades[allTrades.Count-1])
                     {
                         case trade.Flat:
             
-                if ((high > longEntry && lastTrade[1] == 1 && high < failSafeLongEntry)  && skipConsecutiveTrades)
-                {
-                    entry = max(longEntry+oneTick, low);
-                    exit = 0;
-                    trade = trade.skipLong;
-                    tradeProfitPoints = 0;
-                    stop = entry - ATRMultiplier*atr;
-                    entryUnits = 0;
-                    lastTrade = 0;
-                }                
-                else if (( (low < shortEntry && lastTrade[1] == 1 && low > failSafeShortEntry)) && skipConsecutiveTrades)
-                {
-                    entry = min(shortEntry-oneTick, high);
-                    exit = 0;
-                    trade = trade.skipShort;
-                    tradeProfitPoints = 0;
-                    stop = entry+ATRMultiplier*atr;
-                    entryUnits = 0;
-                    lastTrade = 0;
-                }        
-                else if (high > longEntry)
-                {
-                    entry = max(longEntry+oneTick, low);
-                    exit = 0;
-                    trade = trade.long;
-                    tradeProfitPoints = 0;
-                    stop = entry-ATRMultiplier*atr;
-                    entryUnits = unit;
-                    lastTrade = 0;                   
-                }                   
-                else if (low < shortEntry) 
-                {
-                    entry = min(shortEntry-oneTick, high);
-                    exit = 0;
-                    trade = trade.short;
-                    tradeProfitPoints = 0;
-                    stop = entry+ATRMultiplier*atr;
-                    entryUnits = unit;
-                    lastTrade = 0;
-                }             
-                else 
-                {
-                    entry = 0;
-                    exit = 0;
-                    trade = trade.flat;
-                    tradeProfitPoints = 0;
-                    stop = double.nan;
-                    entryUnits = entryUnits[1];
-                    lastTrade = lastTrade[1]; 
-                }
+                            if ((myHigh > longEntry && lastTrade == 1 && myHigh < failSafeLongEntry)  && skipConsecutiveTrades)
+                            {
+                                entry = Math.Max(longEntry+oneTick, myLow);
+                                exit = 0;
+                                myTrade = trade.SkipLong;
+                                tradeProfitPoints = 0;
+                                stop = entry - ATRMultiplier*ATR;
+                                entryUnits = units;
+                                lastTrade = 0;
+                            }                
+                            else if (( (myLow < shortEntry && lastTrade == 1 && myLow > failSafeShortEntry)) && skipConsecutiveTrades)
+                            {
+                                entry = Math.Min(shortEntry-oneTick, myHigh);
+                                exit = 0;
+                                myTrade = trade.SkipShort;
+                                tradeProfitPoints = 0;
+                                stop = entry+ATRMultiplier*ATR;
+                                entryUnits = units;
+                                lastTrade = 0;
+                            }        
+                            else if (myHigh > longEntry)
+                            {
+                                entry = Math.Max(longEntry+oneTick, myLow);
+                                exit = 0;
+                                myTrade = trade.GoLong;
+                                tradeProfitPoints = 0;
+                                stop = entry-ATRMultiplier*ATR;
+                                entryUnits = units;
+                                lastTrade = 0;                   
+                            }                   
+                            else if (myLow < shortEntry) 
+                            {
+                                entry = Math.Min(shortEntry-oneTick, myHigh);
+                                exit = 0;
+                                myTrade = trade.GoShort;
+                                tradeProfitPoints = 0;
+                                stop = entry+ATRMultiplier*ATR;
+                                entryUnits = units;
+                                lastTrade = 0;
+                            }             
+                            else 
+                            {
+                                entry = 0;
+                                exit = 0;
+                                myTrade = trade.Flat;
+                                tradeProfitPoints = 0;
+                                stop = double.nan;
+                                entryUnits = entryUnits[1];
+                                lastTrade = lastTrade[1]; 
+                            }
         
-            case trade.Long:
-                entryUnits = entryUnits[1];
-                if (low < longExit || low < stop[1])
-                {
-                    exit = min(open, max(longExit-oneTick, stop[1]-oneTick));
-                    entry = entry[1];
-                    trade = trade.flat;
-                    tradeProfitPoints = exit - entry[1];
-                    stop = double.nan;
-                    lastTrade = if tradeProfitPoints > 0 then 1 else 0;               
-                } 
-                else
-                {
-                    exit = 0;
-                    entry = entry[1];
-                    trade = trade.long;
-                    tradeProfitPoints = 0;
-                    stop = stop[1];
-                    lastTrade = lastTrade[1];
-                }        
-            case trade.Short:
-                 entryUnits = entryUnits[1];
-                 if (high > shortExit || high > stop[1])
-                {
-                    exit = max(open, min(shortExit+oneTick, stop[1]+oneTick));
-                    entry = entry[1];
-                    trade = trade.flat;
-                    tradeProfitPoints = entry[1]-exit;
-                    stop = double.nan;
-                    lastTrade = if tradeProfitPoints > 0 then 1 else 0;
-                } 
-                else
-                {
-                    exit = 0;
-                    entry = entry[1];
-                    trade = trade.short;
-                    tradeProfitPoints = 0;
-                    stop = stop[1];
-                    lastTrade = lastTrade[1];
-                }        
-            case skipLong:
-                if low < longExit or low < stop[1] then
-                {
-                    exit = min(open, max(longExit-oneTick, stop[1]-oneTick));
-                    entry = entry[1];
-                    trade = trade.flat;
-                    tradeProfitPoints = exit - entry[1];
-                    stop = double.nan;
-                    lastTrade = 0;
-                    entryUnits = 0;
-                } 
-                else if high > failSafeLongEntry then
-                {
-                    entry = max(failSafeLongEntry+oneTick, low);
-                    exit = 0;
-                    trade = trade.long;
-                    tradeProfitPoints = 0;
-                    stop = max(failSafeLongEntry+oneTick, low)-ATRMultiplier*atr;
-                    entryUnits = unit;
-                    lastTrade = 0;
-                }
-                else
-                {
-                    exit = 0;
-                    entry = entry[1];
-                    trade = trade.SkipLong;
-                    tradeProfitPoints = 0;
-                    stop = stop[1];
-                    lastTrade = lastTrade[1];
-                    entryUnits = 0;
-                }
+                        case trade.GoLong:
+                            entryUnits = entryUnits[1];
+                            if (myLow < longExit || myLow < stop[1])
+                            {
+                                exit = Math.Min(myOpen, Math.Max(longExit-oneTick, stop[1]-oneTick));
+                                entry = entry[1];
+                                myTrade = trade.Flat;
+                                tradeProfitPoints = exit - entry[1];
+                                stop = double.nan;
+                                lastTrade = tradeProfitPoints > 0 ? 1 : 0;               
+                            } 
+                            else
+                            {
+                                exit = 0;
+                                entry = entry[1];
+                                myTrade = trade.GoLong;
+                                tradeProfitPoints = 0;
+                                stop = stop[1];
+                                lastTrade = lastTrade[1];
+                            }        
+                        case trade.GoShort:
+                            entryUnits = entryUnits[1];
+                            if (myHigh > shortExit || myHigh > stop[1])
+                            {
+                                exit = Math.Max(myOpen, Math.Min(shortExit+oneTick, stop[1]+oneTick));
+                                entry = entry[1];
+                                myTrade = trade.Flat;
+                                tradeProfitPoints = entry[1]-exit;
+                                stop = double.nan;
+                                lastTrade = tradeProfitPoints > ? 1 : 0;
+                            } 
+                            else
+                            {
+                                exit = 0;
+                                entry = entry[1];
+                                myTrade = trade.GoShort;
+                                tradeProfitPoints = 0;
+                                stop = stop[1];
+                                lastTrade = lastTrade[1];
+                            }        
+                        case trade.SkipLong:
+                            if (myLow < longExit || myLow < stop[1])
+                            {
+                                exit = Math.Min(myOpen, Math.Max(longExit-oneTick, stop[1]-oneTick));
+                                entry = entry[1];
+                                myTrade = trade.Flat;
+                                tradeProfitPoints = exit - entry[1];
+                                stop = double.nan;
+                                lastTrade = 0;
+                                entryUnits = 0;
+                            } 
+                            else if (myHigh > failSafeLongEntry)
+                            {
+                                entry = Math.Max(failSafeLongEntry+oneTick, myLow);
+                                exit = 0;
+                                myTrade = trade.GoLong;
+                                tradeProfitPoints = 0;
+                                stop = Math.Max(failSafeLongEntry+oneTick, myLow)-ATRMultiplier*ATR;
+                                entryUnits = units;
+                                lastTrade = 0;
+                            }
+                            else
+                            {
+                                exit = 0;
+                                entry = entry[1];
+                                myTrade = trade.SkipLong;
+                                tradeProfitPoints = 0;
+                                stop = stop[1];
+                                lastTrade = lastTrade[1];
+                                entryUnits = 0;
+                            }
         
-            case skipShort:
-                if high > shortExit or high > stop[1] then
-                {
-                    entryUnits = 0;
-                    exit = max(open, min(shortExit+oneTick, stop[1]+oneTick));
-                    entry = entry[1];
-                    trade = trade.flat;
-                    tradeProfitPoints = entry[1]-exit;
-                    stop = double.nan;
-                    lastTrade = 0;
-                } 
-                else if low < failSafeShortEntry then
-                {
-                    entry = min(failSafeShortEntry-oneTick, high);
-                    exit = 0;
-                    trade = trade.short;
-                    tradeProfitPoints = 0;
-                    stop = entry+ATRMultiplier*atr;
-                    entryUnits = unit;
-                    lastTrade = 0;
-                }
-                else
-                {
-                    exit = 0;
-                    entry = entry[1];
-                    trade = trade.skipShort;
-                    tradeProfitPoints = 0;
-                    stop = stop[1];
-                    lastTrade = lastTrade[1];
-                    entryUnits = 0;
-                }
-            }
+                        case trade.SkipShort:
+                            if (myHigh > shortExit || myHigh > stop[1])
+                            {
+                                entryUnits = 0;
+                                exit = Math.Max(myOpen, Math.Min(shortExit+oneTick, stop[1]+oneTick));
+                                entry = entry[1];
+                                myTrade = trade.Flat;
+                                tradeProfitPoints = entry[1]-exit;
+                                stop = double.nan;
+                                lastTrade = 0;
+                            } 
+                            else if (myLow < failSafeShortEntry)
+                            {   
+                                entry = Math.Min(failSafeShortEntry-oneTick, myHigh);
+                                exit = 0;
+                                myTrade = trade.GoShort;
+                                tradeProfitPoints = 0;
+                                stop = entry+ATRMultiplier*ATR;
+                                entryUnits = units;
+                                lastTrade = 0;
+                            }
+                            else
+                            {
+                                exit = 0;
+                                entry = entry[1];
+                                myTrade = trade.SkipShort;
+                                tradeProfitPoints = 0;
+                                stop = stop[1];
+                                lastTrade = lastTrade[1];
+                                entryUnits = 0;
+                            }
+                        }
             
-    case System_Two:
+                case SystemType.System_Two:
     
-        switch(trade[1]){
+                    switch(trade[1]){
     
-            case init:
-                lastTrade = 0;
-                entry = 0;
-                exit = 0;
-                trade = if barNumber() >=1 then trade.flat else trade.init;
-                tradeProfitPoints = 0;
-                stop = 0;
-                entryUnits = unit;
+                        case trade.Init:
+                            lastTrade = 0;
+                            entry = 0;
+                            exit = 0;
+                            myTrade = barNumber() >=1 ? trade.Flat : trade.Init;
+                            tradeProfitPoints = 0;
+                            stop = 0;
+                            entryUnits = unit;
+                        case trade.Flat:
+                            if( myHigh > failSafeLongEntry )
+                            {
+                                entry = Math.Max(failSafeLongEntry+oneTick, myLow);
+                                exit = 0;
+                                myTrade = trade.GoLong;
+                                tradeProfitPoints = 0;
+                                stop = entry-ATRMultiplier*ATR;
+                                entryUnits = units;
+                                lastTrade = 0;
+                            }
+                            else if ( myLow < failSafeShortEntry )
+                            {
+                                entry = Math.Min(failSafeShortEntry-oneTick, myHigh);
+                                exit = 0;
+                                myTrade = trade.GoShort;
+                                tradeProfitPoints = 0;
+                                stop = entry+ATRMultiplier*ATR;
+                                entryUnits = unit;
+                                lastTrade = 0;
+                            } 
+                            else 
+                            {
+                                entry = 0;
+                                exit = 0;
+                                myTrade = trade.Flat;
+                                tradeProfitPoints = 0;
+                                stop = double.nan;
+                                entryUnits = entryUnits[1];
+                                lastTrade = 0;
+                            }
     
-            case flat:
-                   if high > failSafeLongEntry then 
-                {
-                    entry = max(failSafeLongEntry+oneTick, low);
-                    exit = 0;
-                    trade = trade.long;
-                    tradeProfitPoints = 0;
-                    stop = entry-ATRMultiplier*atr;
-                    entryUnits = unit;
-                    lastTrade = 0;
-                }
-                else if low < failSafeShortEntry then 
-                {
-                    entry = min(failSafeShortEntry-oneTick, high);
-                    exit = 0;
-                    trade = trade.short;
-                    tradeProfitPoints = 0;
-                    stop = entry+ATRMultiplier*atr;
-                    entryUnits = unit;
-                    lastTrade = 0;
-                } 
-                else 
-                {
-                    entry = 0;
-                    exit = 0;
-                    trade = trade.flat;
-                    tradeProfitPoints = 0;
-                    stop = double.nan;
-                    entryUnits = entryUnits[1];
-                    lastTrade = 0;
-                }
+                        case trade.GoLong:
+                            entryUnits = entryUnits[1];
+                            if (myLow < longExit || myLow < stop[1])
+                            {
+                                exit = Math.Min(myOpen, Math.Max(longExit-oneTick, stop[1]-oneTick));
+                                entry = entry[1];
+                                myTrade = trade.Flat;
+                                tradeProfitPoints = exit - entry[1];
+                                stop = double.nan;
+                                lastTrade = 0;
+                            } 
+                            else
+                            {
+                                exit = 0;
+                                entry = entry[1];
+                                myTrade = trade.GoLong;
+                                tradeProfitPoints = 0;
+                                stop = stop[1];
+                                lastTrade = 0;
+                            }
     
-            case long:
-                entryUnits = entryUnits[1];
-                if low < longExit or low < stop[1] then
-                {
-                    exit = min(open, max(longExit-oneTick, stop[1]-oneTick));
-                    entry = entry[1];
-                    trade = trade.flat;
-                    tradeProfitPoints = exit - entry[1];
-                    stop = double.nan;
-                    lastTrade = 0;
-                } 
-                else
-                {
-                    exit = 0;
-                    entry = entry[1];
-                    trade = trade.long;
-                    tradeProfitPoints = 0;
-                    stop = stop[1];
-                    lastTrade = 0;
-                }
-    
-            case short:
-                entryUnits = entryUnits[1];
-                 if high > shortExit or high > stop[1] then
-                {
-                    exit = max(open, min(shortExit+oneTick, stop[1]+oneTick));
-                    entry = entry[1];
-                    trade = trade.flat;
-                    tradeProfitPoints = entry[1]-exit;
-                    stop = double.nan;
-                    lastTrade = 0;
-                } 
-                else
-                {
-                    exit = 0;
-                    entry = entry[1];
-                    trade = trade.short;
-                    tradeProfitPoints = 0;
-                    stop = stop[1];
-                    lastTrade = 0;
-                }
+                        case trade.GoShort: 
+                            entryUnits = entryUnits[1];
+                            if (myHigh > shortExit || myHigh > stop[1] )
+                            {
+                                exit = Math.Max(myOpen, Math.Min(shortExit+oneTick, stop[1]+oneTick));
+                                entry = entry[1];
+                                myTrade = trade.Flat;
+                                tradeProfitPoints = entry[1]-exit;
+                                stop = double.nan;
+                                lastTrade = 0;
+                            } 
+                            else
+                            {
+                                exit = 0;
+                                entry = entry[1];
+                                myTrade = trade.GoShort;
+                                tradeProfitPoints = 0;
+                                stop = stop[1];
+                                lastTrade = 0;
+                            }
                 
-            case skipShort:
-                entryUnits = 0;
-                exit = 0;
-                entry = 0;
-                trade = trade.short;
-                tradeProfitPoints = 0;
-                stop = 0;
-                lastTrade = 0;
+                        case trade.SkipShort:
+                            entryUnits = 0;
+                            exit = 0;
+                            entry = 0;
+                            myTrade = trade.GoShort;
+                            tradeProfitPoints = 0;
+                            stop = 0;
+                            lastTrade = 0;
     
-            case skipLong:
-                entryUnits = 0;
-                exit = 0;
-                entry = 0;
-                trade = trade.short;
-                tradeProfitPoints = 0;
-                stop = 0;
-                lastTrade = 0;
-        }
+                        case trade.SkipLong:
+                            entryUnits = 0;
+                            exit = 0;
+                            entry = 0;
+                            trade = trade.GoShort;
+                            tradeProfitPoints = 0;
+                            stop = 0;
+                            lastTrade = 0;
+                    }
     
 }
 
